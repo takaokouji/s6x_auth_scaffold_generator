@@ -1,0 +1,10 @@
+説明:
+    認証まわりのソースコードを自動生成する。
+    Rubyは1.9.2-p290、Railsは3.0.10を対象とする。
+    メインのplatformはWindows。
+    言語は日本語のみ。
+
+使用例:
+    rails generate s6x_auth_scaffold User
+
+    「User」には認証に必要なログインIDとパスワードを格納するモデル名を指定する。

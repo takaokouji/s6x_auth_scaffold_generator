@@ -1,0 +1,93 @@
+== S6x(Six) Auth Scaffold Generator
+
+Sorry, Japanese only.
+
+「S6x(Six) Auth Scaffold Generator」(以下、s6x_auth_scaffold)はRails
+3.0向けのシンプルな認証機能をフルスクラッチで記述するためのgeneratorで
+す。s6x_auth_scaffoldの目的はこれからRuby on Railsで開発する方がRailsに
+おける認証の概要をソースコードレベルで理解することを手助けすることです。
+
+s6x_auth_scaffoldは以下の機能を実現するソースコードを自動生成します。
+
+* ログイン画面(/login)でログインIDとパスワードで認証。
+* ユーザのモデル名はUserやEmployeeなど自由にしてできる。
+* ログイン後はWelcome画面(root_url)を表示。
+  * Welcome画面をURLできる。
+* /logoutにアクセスするとログアウトできる。
+* ログアウトするとログイン画面を表示。このときログアウトした旨を表示。
+
+ただし、ソースコードを簡単にすることを優先しているため以下のことはでき
+ません。
+
+* ユーザの作成はWeb上ではできない。
+
+s6x_auth_scaffoldで基本を学んだ後はRailsが提供しているscaffoldのように
+自分で認証機能をカスタマイズしてもよいですが、ぜひDeviseなどの認証ライ
+ブラリの導入を検討してみてください。
+
+== ライセンス
+
+MITライセンス
+
+== 必要なソフトウェア
+
+* Ruby 1.9.2-p290以降
+* Ruby on Rails 3.0.10 (3.1以降では動作確認をしていない)
+
+== インストール方法
+
+  gem install s6x_auth_scaffold_generator
+
+== 使用方法
+
+新しいRailsプロジェクトを作成してデータベースの設定などを行います。
+
+  $ rails new auth_demo
+  $ cd auth_demo
+  $ bundle install
+  (DBの設定など)
+  $ rake db:create:all
+
+s6x_auth_scaffoldで認証まわりのソースコードを自動生成します。
+
+  $ rails generate s6x_auth_scaffold User
+
+rake db:migrateを実行してusersテーブルを作成します。
+
+  $ rake db:migrate
+
+ついでに単体テストも実行します。
+
+  $ rake
+
+動作確認をするためにユーザを作成します。ここではログインIDがadmin、パス
+ワードがadminのユーザを作成しています。
+
+  $ rails console
+  > User.create!(login: "admin", password: "admin")
+  > quit
+
+サーバを起動して動作を確認します。ログインに成功して「Welcome#indexにア
+クセスできない」旨が表示されれば「S6x(Six) Auth Scaffold」はただしく動
+作しています。
+
+  $ rails server
+  (Webブラウザでlocalhost:3000/loginにアクセスする)
+
+サーバを停止させます。
+
+== これから
+
+自動再生されたファイルや変更されたファイルを確認してください。認証に最
+低限必要な機能が実装されているはずです。コード量は少ないので安心してく
+ださい。また、単体テストも記述してあるため、今後の開発の参考になるはず
+です。
+
+一通り確認できたらWelcome画面(Welcome#index)を作成してみてください。
+Welcome画面にはログアウトのボタンやログインIDを表示してみてください。
+
+  <p><%= current_user.login %> <%= link_to "ログアウト", logout_path %></p>
+
+最後に氏名(name)、ふりがな(furigana)、メールアドレス(email)などのユーザ
+の情報をUserモデルに追加してアプリケーションの要件を満たすように改良し
+てみてください。

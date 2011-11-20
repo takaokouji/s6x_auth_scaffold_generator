@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+admin:
+  id: 1
+  login: admin
+  password_digest: "30a389673b7ee019c7fc8201e4a5e83a0f0c9d62" # admin
+  salt: "4NsTR61PRi"
+
+<% login = "#{@user_instance_name}001" %><%= login %>:
+  id: 2
+  login: <%= login %>
+  password_digest: "<%= Digest::SHA1.hexdigest(login + "r8i1tsR1jn") %>" # <%= login %>
+  salt: "r8i1tsR1jn"
