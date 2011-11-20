@@ -67,9 +67,9 @@ rake db:migrateを実行してusersテーブルを作成します。
   > User.create!(login: "admin", password: "admin")
   > quit
 
-サーバを起動して動作を確認します。ログインに成功して「Welcome#indexにア
-クセスできない」旨が表示されれば「S6x(Six) Auth Scaffold」はただしく動
-作しています。
+サーバを起動して動作を確認します。/loginにアクセスしてログインします。
+「Welcome aboard」が表示されればs6x_auth_scaffoldがただしく動作していま
+す。
 
   $ rails server
   (Webブラウザでlocalhost:3000/loginにアクセスする)
