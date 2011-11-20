@@ -3,6 +3,7 @@
 # 現状、Rubyは1.9.2-p290、Railsは3.0.10を対象とする。
 # また、メインのplatformはWindows。
 
+require 'rails/generators/named_base'
 require 'rails/generators/active_record/migration'
 
 class S6xAuthScaffoldGenerator < Rails::Generators::NamedBase
