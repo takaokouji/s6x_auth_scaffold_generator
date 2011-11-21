@@ -62,7 +62,9 @@ class S6xAuthScaffoldGenerator < Rails::Generators::NamedBase
         raise Rails::Generators::Error, msg
       end
     else
-      inject_into_class(dest_path, ApplicationController, "
+      inject_into_class(dest_path, ApplicationController, %Q'
+  before_filter :login_required
+
   # ログイン中のユーザを返す。
   def #{method_name}
     if session[:#{@user_instance_name}_id]
@@ -73,7 +75,21 @@ class S6xAuthScaffoldGenerator < Rails::Generators::NamedBase
     
   helper_method :current_#{@user_instance_name}
 
-".force_encoding("ASCII-8BIT")) # NOTE: force_encoding("ASCII-8BIT")はThorのバグを回避するため。
+  # ログインしているかどうかを返す。
+  def logged_in?
+    return #{method_name} ? true : false
+  end
+
+  helper_method :logged_in?
+
+  def login_required
+    if !logged_in?
+      redirect_to(login_path, alert: "ログインしてください。")
+      return false
+    end
+  end
+
+'.force_encoding("ASCII-8BIT")) # NOTE: force_encoding("ASCII-8BIT")はThorのバグを回避するため。
     end
   end
 end

@@ -1,6 +1,8 @@
 # coding: utf-8
 # セッションを管理するコントローラ。
 class SessionsController < ApplicationController
+  skip_before_filter :login_required, only: :login
+
   # ログイン。
   def login
     if session[:<%= @user_instance_name %>_id]
