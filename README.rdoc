@@ -48,6 +48,8 @@ MITライセンス
 
   $ rails new auth_demo
   $ cd auth_demo
+  (Gemfileに以下を追加)
+  gem 's6x_auth_scaffold_generator'
   $ bundle install
   (DBの設定など)
   $ rake db:create:all
