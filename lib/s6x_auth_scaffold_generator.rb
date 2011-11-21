@@ -62,6 +62,7 @@ class S6xAuthScaffoldGenerator < Rails::Generators::NamedBase
         raise Rails::Generators::Error, msg
       end
     else
+      prepend_to_file(dest_path, "# coding: utf-8\n")
       inject_into_class(dest_path, ApplicationController, %Q'
   before_filter :login_required
 
@@ -82,6 +83,13 @@ class S6xAuthScaffoldGenerator < Rails::Generators::NamedBase
 
   helper_method :logged_in?
 
+  # ログインが必要なコントローラでフィルタとして使う。
+  #
+  # 使用例)
+  #   class SomeController < ActionController::Base
+  #     before_filter :login_required
+  #     skip_before_filter :login_required, only: :login
+  #
   def login_required
     if !logged_in?
       redirect_to(login_path, alert: "ログインしてください。")
