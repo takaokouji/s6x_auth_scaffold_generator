@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "s6x_auth_scaffold_generator"
-  s.version     = "0.0.2"
+  s.version     = "0.0.3"
   s.platform    = Gem::Platform::RUBY
   s.required_ruby_version = '>= 1.9.2'
   s.summary     = "Really simple authentication scaffold generator for Rails"
